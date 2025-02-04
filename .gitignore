@@ -1,0 +1,4 @@
+# build folder
+builds
+downloads
+sstate-cache
