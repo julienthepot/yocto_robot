@@ -1,0 +1,10 @@
+services:
+  robot_yocto_dev:
+    image: robot_yocto_dev
+    build:
+      dockerfile: Dockerfile
+    volumes:
+      - .:/workspace/yocto_robot
+    working_dir: /workspace/yocto_robot
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
