@@ -1,4 +1,4 @@
-from ubuntu:22.04
+FROM ubuntu:22.04
 
 # package need to build an image
 RUN DEBIAN_FRONTEND=noninteractive apt update && DEBIAN_FRONTEND=noninteractive apt install -y git build-essential gawk wget \
@@ -23,8 +23,6 @@ RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
 USER $UNAME
 
-ENV BUILD_FOLDER /build
+ENV BUILD_FOLDER=/build
 
 WORKDIR ${BUILD_FOLDER}
-
-apt install -y git build-essential gawk wget diffstat unzip gcc socat cpio python3 python3-pexpect xz-utils debianutils iputils-ping python3-jinja2 python3-subunit mesa-common-dev liblz4-tool file locales libssl-dev

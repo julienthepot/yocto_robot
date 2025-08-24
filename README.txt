@@ -1,18 +1,26 @@
+# Yocto 
+## Build
+```
+docker compose build robot_yocto_dev
+```
+
+## Launch l'environnement de developpement dans le docker
+```
+docker compose run robot_yocto_dev
+```
+
+Puis déplacer vous dans le repertoire de yocto (binaire/yocto) pour executer les différentes commandes
+
+## Info
+
 poky :
-`git clone git://git.yoctoproject.org/poky --branch kirkstone-4.0.13 --single-branch`   
+`git clone git://git.yoctoproject.org/poky --branch scarthgap-5.0.6 --single-branch`   
 
 meta-raspberrypi :
-`git clone git://git.yoctoproject.org/meta-raspberrypi --branch kirkstone --single-branch`
+`git clone git://git.yoctoproject.org/meta-raspberrypi --branch scarthgap --single-branch`
 
 meta-openembedded-core : 
-`git clone git://git.openembedded.org/meta-openembedded --branch 2022-04.13-kirkstone --single-branch`
-
-meta-ros : 
-`git clone https://github.com/ros/meta-ros.git --branch kirkstone --single-branch`
-
-meta-qt : 
-`git clone https://github.com/meta-qt5/meta-qt5.git --branch kirkstone --single-branch`
-
+`git clone git://git.openembedded.org/meta-openembedded --branch scarthgap --single-branch`
 
 source du fichier yocto (poky)
 deux dossiers de build possible (builds/build-rpi ou builds/build-qemu) 
@@ -59,3 +67,5 @@ bzcat "nom de l'image" > "emplacement du device"
 
 bitbake robot-image -cdo_populate_sdk -Snone
 bitbake robot-image -cdo_populate_sdk -Sprintdiff
+
+bitbake-layers  add-layer  ../../layers/meta-openembedded/meta-oe/
