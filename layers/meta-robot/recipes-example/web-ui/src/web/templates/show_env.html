@@ -1,0 +1,145 @@
+{% extends 'base.html' %}
+
+{% block title %}Show env{% endblock %}
+
+{% block header %}
+  <h2>Show env</h2>
+{% endblock %}
+
+{% block content %}
+
+<div id="envWrapper">
+  <div id="leftControls">
+    <button id="showEnvBtn" type="button">Afficher l'image</button>
+  </div>
+
+  <div id="canvasContainer">
+    <canvas id="envCanvas"></canvas>
+  </div>
+
+  <div id="rightControls">
+    <button id="zoomInBtn" type="button" disabled>
+      <span class="ico">+</span> Zoom +
+    </button>
+    <button id="zoomOutBtn" type="button" disabled>
+      <span class="ico">−</span> Zoom -
+    </button>
+    <button id="resetZoomBtn" type="button" disabled>
+      <span class="ico">⟳</span> Reset
+    </button>
+    <div id="zoomValue">Zoom: 100%</div>
+  </div>
+</div>
+
+<script>
+document.addEventListener('DOMContentLoaded', () => {
+  const btnShow = document.getElementById('showEnvBtn');
+  const btnIn = document.getElementById('zoomInBtn');
+  const btnOut = document.getElementById('zoomOutBtn');
+  const btnReset = document.getElementById('resetZoomBtn');
+  const zoomValueEl = document.getElementById('zoomValue');
+  const canvas = document.getElementById('envCanvas');
+  if (!btnShow || !canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  const hiddenW = 647;
+  const hiddenH = 434;
+
+  canvas.width = hiddenW;
+  canvas.height = hiddenH;
+
+  function fillBlack() {
+    ctx.save();
+    ctx.fillStyle = '#000';
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+    ctx.restore();
+  }
+
+  // Afficher l'image par défaut après l'initialisation complète
+  setTimeout(() => {
+    if (btnShow) btnShow.click();
+  }, 0);
+  fillBlack();
+
+  const img = new Image();
+  img.src = "{{ url_for('static', filename='table_cdr_2026.JPG') }}";
+
+  let imageVisible = false;
+  let zoom = 1;
+  const zoomStep = 0.1;
+  const zoomMin = 0.2;
+  const zoomMax = 3;
+
+  function updateZoomLabel() {
+    zoomValueEl.textContent = 'Zoom: ' + Math.round(zoom * 100) + '%';
+  }
+
+  function setButtonsState(enabled) {
+    [btnIn, btnOut, btnReset].forEach(b => b.disabled = !enabled);
+  }
+
+  function drawImageRotated() {
+    const w = img.naturalWidth;
+    const h = img.naturalHeight;
+    if (!w || !h) return;
+    const angle = 90 * Math.PI / 180;
+    canvas.width = h * zoom;
+    canvas.height = w * zoom;
+    fillBlack();
+    ctx.save();
+    ctx.translate(canvas.width / 2, canvas.height / 2);
+    ctx.rotate(angle);
+    ctx.scale(zoom, zoom);
+    ctx.drawImage(img, -w / 2, -h / 2);
+    ctx.restore();
+  }
+
+  img.addEventListener('load', () => {
+    if (imageVisible) drawImageRotated();
+  });
+
+  btnShow.addEventListener('click', () => {
+    if (!imageVisible) {
+      if (img.complete) drawImageRotated();
+      imageVisible = true;
+      btnShow.textContent = "Masquer l'image";
+      setButtonsState(true);
+    } else {
+      imageVisible = false;
+      btnShow.textContent = "Afficher l'image";
+      setButtonsState(false);
+      zoom = 1;
+      updateZoomLabel();
+      canvas.width = hiddenW;
+      canvas.height = hiddenH;
+      fillBlack();
+    }
+  });
+
+  btnIn.addEventListener('click', () => {
+    if (zoom < zoomMax) {
+      zoom = Math.min(zoomMax, +(zoom + zoomStep).toFixed(3));
+      updateZoomLabel();
+      drawImageRotated();
+    }
+  });
+
+  btnOut.addEventListener('click', () => {
+    if (zoom > zoomMin) {
+      zoom = Math.max(zoomMin, +(zoom - zoomStep).toFixed(3));
+      updateZoomLabel();
+      drawImageRotated();
+    }
+  });
+
+  btnReset.addEventListener('click', () => {
+    zoom = 1;
+    updateZoomLabel();
+    drawImageRotated();
+  });
+
+  updateZoomLabel();
+  setButtonsState(false);
+});
+</script>
+{% endblock %}

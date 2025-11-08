@@ -23,6 +23,6 @@ RUN groupadd -g $GID -o $UNAME
 RUN useradd -m -u $UID -g $GID -o -s /bin/bash $UNAME
 USER $UNAME
 
-ENV BUILD_FOLDER=/build
+ENV BUILD_FOLDER=/workspace/yocto_robot
 
 WORKDIR ${BUILD_FOLDER}

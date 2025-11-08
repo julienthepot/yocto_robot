@@ -1,0 +1,4 @@
+click==8.3.0
+Flask==3.1.2
+flask_sock==0.7.0
+websocket_client==1.9.0

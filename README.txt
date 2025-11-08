@@ -62,6 +62,7 @@ sudo -s
 lsblk => permet de savoir où est le device
 umount "emplacement du device" => exemple : sudo umount /dev/sda?
 bzcat "nom de l'image" > "emplacement du device"
+sudo dd if="builds/build-rpi/tmp/deploy/images/raspberrypi3-64/robot-image-raspberrypi3-64.rootfs.wic" of="/dev/sdc" status=progress
 ```
 
 

@@ -1,0 +1,21 @@
+<!doctype html>
+<title>{% block title %}{% endblock %} - robot</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+<nav class="navbar">
+  <div class="nav-brand">🤖 WEBUI Robot</div>
+  <ul class="nav-links">
+    <li><a href="/" class="nav-link">Accueil</a></li>
+    <li><a href="{{ url_for('show_env.show_env') }}" class="nav-link">Show env</a></li>
+    <li><a href="{{ url_for('log.logs') }}" class="nav-link">Logs</a></li>
+    <li><a href="{{ url_for('camera.camera') }}" class="nav-link">Camera</a></li>
+  </ul>
+</nav>
+<section class="content">
+  <header>
+    {% block header %}{% endblock %}
+  </header>
+  {% for message in get_flashed_messages() %}
+    <div class="flash">{{ message }}</div>
+  {% endfor %}
+  {% block content %}{% endblock %}
+</section>
