@@ -10,3 +10,6 @@
 [submodule "layers/meta-mender"]
 	path = layers/meta-mender
 	url = https://github.com/mendersoftware/meta-mender
+[submodule "layers/meta-mender-community"]
+	path = layers/meta-mender-community
+	url = https://github.com/mendersoftware/meta-mender-community.git
