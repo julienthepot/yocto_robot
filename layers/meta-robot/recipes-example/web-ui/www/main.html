@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<title>Données WebSocket en temps réel</title>
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<link rel="stylesheet" href="ui/style.css">
+</head>
+<body>
+  <h1>Flux temps réel</h1>
+  <div class="board">
+    <div class="data">
+      <span class="label">Horodatage</span>
+      <span class="value" id="timestamp">--</span>
+    </div>
+    <div class="data">
+      <span class="label">Valeur 1</span>
+      <span class="value glow-accent" id="value1">--</span>
+    </div>
+    <div class="data">
+      <span class="label">Valeur 2</span>
+      <span class="value" id="value2">--</span>
+    </div>
+    <div class="data">
+      <span class="label">Valeur 3</span>
+      <span class="value" id="value3">--</span>
+    </div>
+    <div id="status" class="warn pulse">Connexion...</div>
+  </div>
+
+<script src="ui/app.js"></script>
+</body>
+</html>
