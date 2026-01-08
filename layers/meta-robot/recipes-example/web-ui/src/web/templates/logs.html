@@ -1,0 +1,99 @@
+{% extends 'base.html' %}
+
+{% block title %}Logs{% endblock %}
+
+{% block header %}
+  <h2>Logs</h2>
+{% endblock %}
+
+{% block content %}
+  <div id="logs-container">
+    <div style="margin-bottom: 10px;">
+      <label for="refresh-rate">Refresh rate (seconds):</label>
+      <select id="refresh-rate">
+        <option value="1">1s</option>
+        <option value="5" selected>5s</option>
+        <option value="30">30s</option>
+        <option value="60">1min</option>
+        <option value="300">5min</option>
+        <option value="1800">30min</option>
+        <option value="3600">1h</option>
+      </select>
+      <button id="toggle-refresh">Stop</button>
+    </div>
+    
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Timestamp</th>
+          <th>Level</th>
+          <th>Message</th>
+        </tr>
+      </thead>
+      <tbody id="logs-tbody">
+      {% for log in logs %}
+        <tr>
+          <td>{{ log.id }}</td>
+          <td>{{ log.created }}</td>
+          <td>{{ log.level }}</td>
+          <td>{{ log.message }}</td>
+        </tr>
+      {% endfor %}
+      </tbody>
+    </table>
+  </div>
+
+  <script>
+    let refreshInterval = null;
+    let isRefreshing = true;
+
+    function refreshLogs() {
+      fetch('/log/logs')
+        .then(response => response.json())
+        .then(logs => {
+          const tbody = document.getElementById('logs-tbody');
+          tbody.innerHTML = logs.map(log => `
+            <tr>
+              <td>${log.id}</td>
+              <td>${log.created}</td>
+              <td>${log.level}</td>
+              <td>${log.message}</td>
+            </tr>
+          `).join('');
+        });
+    }
+
+    function startRefresh() {
+      const rate = parseInt(document.getElementById('refresh-rate').value) * 1000;
+      if (refreshInterval) clearInterval(refreshInterval);
+      refreshInterval = setInterval(refreshLogs, rate);
+      isRefreshing = true;
+      document.getElementById('toggle-refresh').textContent = 'Stop';
+    }
+
+    function stopRefresh() {
+      if (refreshInterval) clearInterval(refreshInterval);
+      isRefreshing = false;
+      document.getElementById('toggle-refresh').textContent = 'Start';
+    }
+
+    document.getElementById('toggle-refresh').addEventListener('click', () => {
+      if (isRefreshing) {
+        stopRefresh();
+      } else {
+        startRefresh();
+      }
+    });
+
+    document.getElementById('refresh-rate').addEventListener('change', () => {
+      if (isRefreshing) {
+        startRefresh();
+      }
+    });
+
+    // Refresh immédiat puis démarrer le rafraîchissement automatique
+    refreshLogs();
+    startRefresh();
+  </script>
+{% endblock %}

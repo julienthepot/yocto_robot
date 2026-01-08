@@ -31,7 +31,8 @@ def create_app(test_config=None):
     from . import db
     db.init_app(app)
 
-    from . import log, show_env, camera
+    from . import log, show_env, camera, ui
+    app.register_blueprint(ui.bp)
     app.register_blueprint(camera.bp)
     app.register_blueprint(log.bp)
     app.register_blueprint(show_env.bp)
