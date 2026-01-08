@@ -7,3 +7,6 @@
 [submodule "layers/meta-raspberrypi"]
 	path = layers/meta-raspberrypi
 	url = git://git.yoctoproject.org/meta-raspberrypi
+[submodule "layers/meta-mender"]
+	path = layers/meta-mender
+	url = https://github.com/mendersoftware/meta-mender
