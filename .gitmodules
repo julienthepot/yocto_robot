@@ -1,6 +1,6 @@
 [submodule "layers/meta-openembedded"]
 	path = layers/meta-openembedded
 	url = git://git.openembedded.org/meta-openembedded
-[submodule "layers/meta-mender"]
-	path = layers/meta-mender
-	url = https://github.com/mendersoftware/meta-mender
+[submodule "layers/poky"]
+	path = layers/poky
+	url = git://git.yoctoproject.org/poky
