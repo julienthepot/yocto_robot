@@ -14,7 +14,7 @@ Puis déplacer vous dans le repertoire de yocto (binaire/yocto) pour executer le
 ## Info
 
 poky :
-`git clone git://git.yoctoproject.org/poky --branch scarthgap-5.0.6 --single-branch`   
+`git clone git://git.yoctoproject.org/poky --branch scarthgap-5.0.13 --single-branch`
 
 meta-raspberrypi :
 `git clone git://git.yoctoproject.org/meta-raspberrypi --branch scarthgap --single-branch`
