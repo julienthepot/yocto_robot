@@ -3,8 +3,6 @@ include recipes-core/images/core-image-base.bb
 
 COMPATIBLE_MACHINE = "^rpi$"
 
-IMAGE_FSTYPES = "ext4 ext3 wic"
-
 IMAGE_FEATURES:remove = "splash"
 IMAGE_FEATURES:remove = "package-management"
 IMAGE_FEATURES:append = " allow-root-login"
