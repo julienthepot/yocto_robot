@@ -10,3 +10,10 @@
 [submodule "layers/meta-mender"]
 	path = layers/meta-mender
 	url = https://github.com/mendersoftware/meta-mender
+[submodule "layers/meta-mender-community"]
+	path = layers/meta-mender-community
+	url = https://github.com/mendersoftware/meta-mender-community.git
+[submodule "layers/meta-lts-mixins"]
+	path = layers/meta-lts-mixins
+	url = https://git.yoctoproject.org/meta-lts-mixins
+	branch = scarthgap/u-boot
