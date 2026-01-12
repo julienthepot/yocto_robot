@@ -7,7 +7,6 @@ IMAGE_FSTYPES = "ext4 ext3 wic"
 
 IMAGE_FEATURES:remove = "splash"
 IMAGE_FEATURES:remove = "package-management"
-IMAGE_FEATURES:append = " x11-base"
 IMAGE_FEATURES:append = " allow-root-login"
 IMAGE_FEATURES:append = " allow-empty-password"
 IMAGE_FEATURES:append = " empty-root-password"
@@ -29,4 +28,4 @@ EXTRA_USERS_PARAMS = "\
     usermod -p '${PASSWD}' root; \
 "
 
-REQUIRED_DISTRO_FEATURES = "x11 cpufrequtils"
+REQUIRED_DISTRO_FEATURES = "cpufrequtils"
