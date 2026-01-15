@@ -1,0 +1,9 @@
+[Unit]
+Description=Wifi configuration
+After=network.target
+
+[Service]
+ExecStart=/bin/config-wifi.sh
+
+[Install]
+WantedBy=multi-user.target
