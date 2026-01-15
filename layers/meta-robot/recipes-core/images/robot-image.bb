@@ -18,6 +18,8 @@ IMAGE_INSTALL:append = " procps"
 IMAGE_INSTALL:append = " file"
 IMAGE_INSTALL:append = " zile"
 IMAGE_INSTALL:append = " cpufrequtils"
+IMAGE_INSTALL:append = " config-wifi"
+IMAGE_INSTALL:append = " curl"
 
 # mkpasswd -m sha256crypt <your-password>
 # password: ppp
