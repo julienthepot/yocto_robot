@@ -64,14 +64,14 @@ quit an qemu application
 Ctr + A puis X 
 
 flash une image
-localisation : build-rpi/tmp/deploy/images/raspberrypi3-64/core-image-minimal-raspberrypi3-64.wic.bz2
+localisation : build-rpi/tmp/deploy/images/raspberrypi3-64-robot/core-image-minimal-raspberrypi3-64.wic.bz2
 commande pour flash :
 ```
 sudo -s
 lsblk => permet de savoir où est le device
 umount "emplacement du device" => exemple : sudo umount /dev/sda?
 bzcat "nom de l'image" > "emplacement du device"
-sudo dd if="builds/build-rpi/tmp/deploy/images/raspberrypi3-64/robot-image-raspberrypi3-64.rootfs.wic" of="/dev/sdc" status=progress
+sudo dd if="builds/build-rpi/tmp/deploy/images/raspberrypi3-64-robot/robot-image-raspberrypi3-64.rootfs.wic" of="/dev/sdc" status=progress
 ```
 
 ## Configuration Mender (OTA Updates)
@@ -124,7 +124,7 @@ Les images générées se trouvent dans :
 sudo -s
 lsblk  # identifier le device (ex: /dev/sdc)
 umount /dev/sdc*  # démonter toutes les partitions
-sudo dd if=builds/build-rpi/tmp/deploy/images/raspberrypi3-64/robot-image-raspberrypi3-64.sdimg of=/dev/sda bs=1G status=progress && sync
+sudo dd if=builds/build-rpi/tmp/deploy/images/raspberrypi3-64-robot/robot-image-raspberrypi3-64.sdimg of=/dev/sda bs=1G status=progress && sync
 ```
 
 ### Déploiement OTA avec Mender
