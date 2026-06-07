@@ -14,6 +14,9 @@ RUN DEBIAN_FRONTEND=noninteractive pip3 install sphinx sphinx_rtd_theme pyyaml
 # package need to simu an image
 RUN DEBIAN_FRONTEND=noninteractive apt update && DEBIAN_FRONTEND=noninteractive apt install -y qemu
 
+# package need to use menuconfig
+RUN DEBIAN_FRONTEND=noninteractive apt install -y tmux
+
 RUN locale-gen en_US.UTF-8
 
 ARG UNAME=worker

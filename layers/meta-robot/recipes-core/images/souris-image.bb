@@ -4,7 +4,7 @@ include recipes-core/images/core-image-base.bb
 COMPATIBLE_MACHINE = "^rpi$"
 
 # Type de dispositif (identifiant du type de matériel)
-# MENDER_DEVICE_TYPE = "raspberrypi3-64"
+# MENDER_DEVICE_TYPE = "raspberrypi0-w"
 
 IMAGE_FEATURES:remove = "splash"
 IMAGE_FEATURES:remove = "package-management"
@@ -23,6 +23,10 @@ IMAGE_INSTALL:append = " zile"
 IMAGE_INSTALL:append = " cpufrequtils"
 IMAGE_INSTALL:append = " config-wifi"
 IMAGE_INSTALL:append = " curl"
+IMAGE_INSTALL:append = " systemd-analyze"
+
+DISTRO_FEATURES:append = " wifi"
+IMAGE_INSTALL:append = " linux-firmware-rpidistro-bcm43430"
 
 # mkpasswd -m sha256crypt <your-password>
 # password: ppp
