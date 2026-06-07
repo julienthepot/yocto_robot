@@ -1,9 +1,16 @@
 [Unit]
 Description=Wifi configuration
-After=network.target
+After=connman.service
+Wants=connman.service
 
 [Service]
-ExecStart=/bin/config-wifi.sh
+Type=oneshot
+RemainAfterExit=yes
+EnvironmentFile=-/etc/default/config-wifi
+ExecStart=/usr/bin/config-wifi.sh
+StandardOutput=journal+console
+StandardError=journal+console
+SyslogIdentifier=config-wifi
 
 [Install]
 WantedBy=multi-user.target

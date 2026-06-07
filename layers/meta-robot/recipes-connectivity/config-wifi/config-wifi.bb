@@ -7,7 +7,7 @@ inherit systemd
 
 RDEPENDS:${PN} = "wireless-regdb-static iw bash"
 
-SYSTEMD_SERVICE:${PN} = "config-wifi.service"
+SYSTEMD_SERVICE:${PN} = "config-wifi.service unblock_wifi.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
 
 RPI_KERNEL_DEVICETREE_OVERLAYS:remove = " \
@@ -17,6 +17,8 @@ RPI_KERNEL_DEVICETREE_OVERLAYS:remove = " \
 
 SRC_URI = "file://config-wifi.service \
            file://config-wifi.sh \
+           file://config-wifi.env \
+           file://unblock_wifi.service \
 "
 
 do_install () {
@@ -29,9 +31,13 @@ do_install () {
 
   # Install script
   install -D -m 0755 ${WORKDIR}/config-wifi.sh ${D}${bindir}/config-wifi.sh
+
+  # Install WiFi runtime configuration template (no secrets)
+  install -D -m 0644 ${WORKDIR}/config-wifi.env ${D}${sysconfdir}/default/config-wifi
   
   # Install systemd service
   install -D -m 0644 ${WORKDIR}/config-wifi.service ${D}${systemd_system_unitdir}/config-wifi.service
+  install -D -m 0644 ${WORKDIR}/unblock_wifi.service ${D}${systemd_system_unitdir}/unblock_wifi.service
 }
 
 FILES:${PN} += "${sysconfdir}/default/* \
