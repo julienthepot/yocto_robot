@@ -24,7 +24,7 @@ IMAGE_INSTALL:append = " cpufrequtils"
 IMAGE_INSTALL:append = " config-wifi"
 IMAGE_INSTALL:append = " curl"
 IMAGE_INSTALL:append = " systemd-analyze"
-IMAGE_INSTALL:append = " syslog-ng"
+IMAGE_INSTALL:append = " syslog-ng logrotate"
 
 DISTRO_FEATURES:append = " wifi"
 IMAGE_INSTALL:append = " linux-firmware-rpidistro-bcm43430"
