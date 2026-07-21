@@ -13,6 +13,12 @@ build:
 build/souris:
 	docker compose run --remove-orphans robot_yocto_dev bash -c "source layers/poky/oe-init-build-env builds/build-souris/ && bitbake souris-image"
 
+sdk:
+	docker compose run --remove-orphans robot_yocto_dev bash -c "source layers/poky/oe-init-build-env builds/build-rpi/ && bitbake robot-image -c populate_sdk"
+
+sdk/souris:
+	docker compose run --remove-orphans robot_yocto_dev bash -c "source layers/poky/oe-init-build-env builds/build-souris/ && bitbake souris-image -c populate_sdk"
+
 clean:
 	docker compose run --remove-orphans robot_yocto_dev bash -c "source layers/poky/oe-init-build-env builds/build-rpi/ && bitbake -c clean robot-image"
 
