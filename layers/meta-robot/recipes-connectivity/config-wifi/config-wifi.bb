@@ -5,7 +5,13 @@ LIC_FILES_CHKSUM = "file://${COMMON_LICENSE_DIR}/MIT;md5=0835ade698e0bcf8506ecda
 
 inherit systemd
 
-RDEPENDS:${PN} = "wireless-regdb-static iw bash"
+RDEPENDS:${PN} = "\
+  wireless-regdb-static \
+  iw \
+  bash \
+  connman \
+  connman-client \
+"
 
 SYSTEMD_SERVICE:${PN} = "config-wifi.service unblock_wifi.service"
 SYSTEMD_AUTO_ENABLE:${PN} = "enable"
