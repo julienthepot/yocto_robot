@@ -1,0 +1,9 @@
+/data/cache/syslog-ng/messages.log {
+    size 30M
+    rotate 2
+    missingok
+    notifempty
+    compress
+    copytruncate
+    create 0640 root root
+}
